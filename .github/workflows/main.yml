@@ -32,5 +32,4 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a hello script
         run: |
-          echo ${{ github.action_repository }}
-          echo ${{ github.* }}
+          echo ${{ github.github.workspace }}
