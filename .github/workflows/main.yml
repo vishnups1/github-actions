@@ -24,12 +24,4 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Make the hello script executable
-        run: chmod +x hello.sh
-
-      # Runs a set of commands using the runners shell
-      - name: Run a hello script
-        run: |
-          echo ${{ github.github.workspace }}
+      - run: echo '${{ github.github.workspace }}'
