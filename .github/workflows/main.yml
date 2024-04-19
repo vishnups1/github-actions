@@ -21,18 +21,26 @@ jobs:
   job1:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    outputs:
+      job1op1: ${{ steps.step5.outputs.test }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - run: echo '${{ toJson(github) }}'
-      - run: echo '${{ github.ref }}'
-      - run: echo "BAR=foo" >> $GITHUB_ENV
+      - id: step1
+        uses: actions/checkout@v2
+      - id: step2
+        run: echo '${{ toJson(github) }}'
+      - id: step3
+        run: echo '${{ github.ref }}'
+      - id: step4
+        run: echo "BAR=foo" >> $GITHUB_ENV
+      - id: step5
+        run: echo "test=step5-job1" >> "$GITHUB_OUTPUT"
   job2:
     runs-on: ubuntu-latest
     needs: [job1]
     steps:
       - uses: actions/checkout@v2
       - run: echo '${{ env.foo }}'
-      - run: echo '${{ env.BAR }}'
+      - run: echo '${{ needs.job1.outputs.job1op1 }}'
