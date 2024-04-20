@@ -33,7 +33,7 @@ jobs:
         run: |
           if [[ "${{ inputs.context_type }}" == "github" ]]; then
             echo '${{ toJson(github) }}'
-          if [[ "${{ inputs.context_type }}" == "env" ]]; then
+          elif [[ "${{ inputs.context_type }}" == "env" ]]; then
             echo '${{ toJson(env) }}'
           else
             echo '${{ toJson(inputs.context_type) }}'
