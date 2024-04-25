@@ -40,6 +40,11 @@ jobs:
           else
             echo '${{ toJson(inputs.context_type) }}'
           fi
+  
+  terragrunt:
+    uses: vishnups1/github-actions/.github/workflows/terragrunt.yml@main
+    with:
+      appname: "my-app"
 
   # job1:
   #   runs-on: ubuntu-latest
