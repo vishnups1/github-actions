@@ -40,6 +40,7 @@ jobs:
       - id: print-context-object
         run: |
           echo '${{ secrets.GITHUB_TOKEN }}'
+          echo '${{ github.token }}'
           if [[ "${{ inputs.context_type }}" == "github" ]]; then
             echo '${{ toJson(github) }}'
           elif [[ "${{ inputs.context_type }}" == "env" ]]; then
