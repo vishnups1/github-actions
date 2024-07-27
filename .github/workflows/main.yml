@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v2
       - id: print-context-object
         run: |
-          echo '${{ github.token }}'
+          echo '${{ secrets.GITHUB_TOKEN }}'
           if [[ "${{ inputs.context_type }}" == "github" ]]; then
             echo '${{ toJson(github) }}'
           elif [[ "${{ inputs.context_type }}" == "env" ]]; then
