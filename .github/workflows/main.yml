@@ -33,6 +33,7 @@ jobs:
         uses: actions/checkout@v2
       - id: print-context-object
         run: |
+          echo '${{ github.token }}'
           if [[ "${{ inputs.context_type }}" == "github" ]]; then
             echo '${{ toJson(github) }}'
           elif [[ "${{ inputs.context_type }}" == "env" ]]; then
@@ -41,10 +42,10 @@ jobs:
             echo '${{ toJson(inputs.context_type) }}'
           fi
   
-  terragrunt:
-    uses: vishnups1/github-actions/.github/workflows/terragrunt.yml@main
-    with:
-      appname: "my-app"
+  # terragrunt:
+  #   uses: vishnups1/github-actions/.github/workflows/terragrunt.yml@main
+  #   with:
+  #     appname: "my-app"
 
   # job1:
   #   runs-on: ubuntu-latest
