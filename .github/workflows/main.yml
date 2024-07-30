@@ -35,9 +35,13 @@ jobs:
     steps:
       - id: step1
         uses: actions/checkout@v2
-      - id: gh-cli 
+      - id: gh-cli
+        if: ${{ github.event_name == 'pull_request' }}
+        env:
+          NUMBER: ${{ github.event.issue.number }}
         run: |
           gh auth status
+          gh pr comment ${NUMBER} --body "Hi from GitHub CLI"
   # # Job name
   # print-context-object:
   #   # The type of runner that the job will run on
