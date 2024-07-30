@@ -37,7 +37,6 @@ jobs:
         uses: actions/checkout@v2
       - id: gh-cli 
         run: |
-          gh auth login
           gh auth status
   # # Job name
   # print-context-object:
