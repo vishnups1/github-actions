@@ -28,26 +28,34 @@ env:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # Job name
-  print-context-object:
-    # The type of runner that the job will run on
+  gh-cli:
     runs-on: ubuntu-latest
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - id: step1
         uses: actions/checkout@v2
-      - id: print-context-object
+      - id: gh-cli 
         run: |
-          echo '${{ secrets.GITHUB_TOKEN }}'
-          echo '${{ github.token }}'
-          if [[ "${{ inputs.context_type }}" == "github" ]]; then
-            echo '${{ toJson(github) }}'
-          elif [[ "${{ inputs.context_type }}" == "env" ]]; then
-            echo '${{ toJson(env) }}'
-          else
-            echo '${{ toJson(inputs.context_type) }}'
-          fi
+          gh auth status
+  # # Job name
+  # print-context-object:
+  #   # The type of runner that the job will run on
+  #   runs-on: ubuntu-latest
+  #   # Steps represent a sequence of tasks that will be executed as part of the job
+  #   steps:
+  #     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+  #     - id: step1
+  #       uses: actions/checkout@v2
+  #     - id: print-context-object
+  #       run: |
+  #         echo '${{ secrets.GITHUB_TOKEN }}'
+  #         echo '${{ github.token }}'
+  #         if [[ "${{ inputs.context_type }}" == "github" ]]; then
+  #           echo '${{ toJson(github) }}'
+  #         elif [[ "${{ inputs.context_type }}" == "env" ]]; then
+  #           echo '${{ toJson(env) }}'
+  #         else
+  #           echo '${{ toJson(inputs.context_type) }}'
+  #         fi
   
   # terragrunt:
   #   uses: vishnups1/github-actions/.github/workflows/terragrunt.yml@main
