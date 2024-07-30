@@ -35,6 +35,8 @@ jobs:
     steps:
       - id: step1
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
       - id: gh-cli
         if: ${{ github.event_name == 'pull_request' }}
         env:
