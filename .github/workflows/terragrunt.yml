@@ -26,6 +26,6 @@ jobs:
             - name: Output
               id: output
               run: |
-                  echo "${{ steps.meta.outputs.digest }}"
-                  echo "${{ steps.meta.outputs.tag }}"
+                  echo "${{ steps.meta.outputs.labels }}"
+                  echo "${{ steps.meta.outputs.tags }}"
                   
