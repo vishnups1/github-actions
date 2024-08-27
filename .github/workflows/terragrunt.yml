@@ -28,7 +28,7 @@ jobs:
                     type=raw,value=sha-${{ github.event.inputs.ref }},priority=1001
                     type=ref,event=branch
                     type=ref,event=pr
-                    type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
+                    type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
             - name: Output
               id: output
               run: |
