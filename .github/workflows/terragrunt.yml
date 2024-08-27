@@ -1,7 +1,7 @@
 name: docker-meta
 
 on:
-    workflow_call:
+    workflow_dispatch:
         inputs:
             ref:
                 type: string
@@ -28,3 +28,4 @@ jobs:
               run: |
                   echo "${{ steps.meta.outputs.digest }}"
                   echo "${{ steps.meta.outputs.tag }}"
+                  
