@@ -1,24 +1,30 @@
-name: terragrunt
+name: docker-meta
 
 on:
     workflow_call:
         inputs:
-            appname:
+            ref:
                 type: string
                 required: true
-                description: 'The name of the application'
+                description: 'ref'
     
 jobs:
-    terragrunt:
+    promote:
+        name: Promote Build
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
-              uses: actions/checkout@v2
-            - name: Print App Name
-              shell: bash
+              id: checkout
+              uses: actions/checkout@v4
+              with:
+                  ref: ${{ github.event.inputs.tag }}
+            - name: Docker Metadata
+              id: meta
+              uses: docker/metadata-action@v5
+              with:
+                  images: ${{ github.repository }}
+            - name: Output
+              id: output
               run: |
-                echo "App Name: ${{ inputs.appname }}"
-            - name: Print Event Type
-              shell: bash
-              run: |
-                echo "Event Type: ${{ github.event_name }}"
+                  echo "${{ steps.meta.outputs.digest }}"
+                  echo "${{ steps.meta.outputs.tag }}"
