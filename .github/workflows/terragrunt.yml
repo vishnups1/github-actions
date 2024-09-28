@@ -23,6 +23,7 @@ jobs:
               run: |
                   node -v
                   npm -v
+                  npm install -g @octokit/rest
                   npm list -g --depth=0
             - name: Docker Metadata
               id: meta
