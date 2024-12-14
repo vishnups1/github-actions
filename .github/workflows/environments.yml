@@ -12,6 +12,7 @@ on:
 jobs:
   Build-Stg:
     name: Build-Stg
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: staging
@@ -23,22 +24,9 @@ jobs:
         run: |
           echo "Building Docker Image"
 
-  Build-Prod:
-    name: Build-Prod
-    runs-on: ubuntu-latest
-    environment:
-      name: production
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Build Docker Image
-        shell: bash
-        run: |
-          echo "Building Docker Image"
-  
   DeployStg:
-    name: Deploy Stg
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    name: Deploy-Stg
+    if: github.event_name == 'pull_request'
     environment:
       name: staging
       url: https://staging.example.com
@@ -51,6 +39,20 @@ jobs:
         shell: bash
         run: |
           echo "Deploying Staging"
+
+  Build-Prod:
+    name: Build-Prod
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build Docker Image
+        shell: bash
+        run: |
+          echo "Building Docker Image"
 
   DeployProd:
     name: Deploy Prod
