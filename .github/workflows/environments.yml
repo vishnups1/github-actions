@@ -33,7 +33,7 @@ jobs:
       - name: Build
         shell: bash
         run: |
-          echo "running deploy"
+          echo "running deploy
           echo "${{ github.event.pull_request.number }}"
           echo "${{ vars.PULL_REQUEST_ENV }}"
           echo "${{ vars.REPOSITORY_VARIABLE }}"
