@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  deploy-pr:
-    name: deploy-pr
+  build:
+    name: build
     runs-on: ubuntu-latest
     environment:
       name: pull_request
@@ -20,7 +20,18 @@ jobs:
         run: |
           echo "running pr build"
           echo "${{ github.event.pull_request.number }}"
-      - name: Deploy
+  
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: pull_request
+      url: "https://pr-${{ github.event.pull_request.number }}.foo.example.com"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
         shell: bash
         run: |
           echo "running deploy"
+          echo "${{ github.event.pull_request.number }}"
