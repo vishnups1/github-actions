@@ -10,7 +10,7 @@ jobs:
     name: build
     runs-on: ubuntu-latest
     environment:
-      name: pull_request
+      name: pull-request
     steps:
       - name: Checkout
         uses: actions/checkout@v2
