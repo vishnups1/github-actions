@@ -15,8 +15,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: build
+      - name: Build
         shell: bash
         run: |
           echo "running pr build"
           echo "${{ github.event.pull_request.number }}"
+      - name: Deploy
+        shell: bash
+        run: |
+          echo "running deploy"
