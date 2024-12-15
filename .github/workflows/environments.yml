@@ -6,14 +6,17 @@ on:
       - main
 
 jobs:
-  DeployProd:
-    name: Deploy Prod
+  deploy-pr:
+    name: deploy-pr
     runs-on: ubuntu-latest
+    environment:
+      name: pull_request
+      url: "https://$pr-{{ github.event.pull_request.number }}.foo.example.com"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Deploy Production
+      - name: build
         shell: bash
         run: |
-          echo "Deploying Production"
+          echo "running pr build"
           echo "${{ github.event.pull_request.number }}"
