@@ -35,5 +35,5 @@ jobs:
         run: |
           echo "running deploy"
           echo "${{ github.event.pull_request.number }}"
-          echo "${{ env.PULL_REQUEST_ENV }}"
-          echo "${{ env.REPOSITORY_VARIABLE }}"
+          echo "${{ vars.PULL_REQUEST_ENV }}"
+          echo "${{ vars.REPOSITORY_VARIABLE }}"
