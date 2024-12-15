@@ -6,17 +6,34 @@ on:
       - main
 
 jobs:
-  deploy-pr:
-    name: deploy-pr
+  build:
+    name: build
     runs-on: ubuntu-latest
     environment:
-      name: pull_request
-      url: "https://$pr-{{ github.event.pull_request.number }}.foo.example.com"
+      name: pull-request
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: build
+      - name: Build
         shell: bash
         run: |
           echo "running pr build"
           echo "${{ github.event.pull_request.number }}"
+
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: pull-request
+      url: "https://pr-${{ github.event.pull_request.number }}.foo.example.com"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        shell: bash
+        run: |
+          echo "running deploy"
+          echo "${{ github.event.pull_request.number }}"
+          echo "${{ vars.PULL_REQUEST_ENV }}"
+          echo "${{ vars.REPOSITORY_VARIABLE }}"
