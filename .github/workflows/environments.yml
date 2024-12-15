@@ -6,9 +6,6 @@ on:
 jobs:
   DeployProd:
     name: Deploy Prod
-    environment:
-      name: production
-      url: https://example.com
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
