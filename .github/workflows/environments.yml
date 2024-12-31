@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-devel:
-    name: build
+    name: build-devel
     runs-on: ubuntu-latest
     environment:
       name: pull-request
@@ -17,13 +17,12 @@ jobs:
       - name: Build
         shell: bash
         run: |
-          echo "running pr build"
-          echo "${{ github.event.pull_request.number }}"
+          echo "running dev build"
 
   development:
     name: development
     runs-on: ubuntu-latest
-    needs: build
+    needs: build-devel
     environment:
       name: development
     steps:
