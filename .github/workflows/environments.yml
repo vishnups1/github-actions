@@ -10,7 +10,7 @@ jobs:
     name: build-dev
     runs-on: ubuntu-latest
     environment:
-      name: pull-request
+      name: development
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -25,6 +25,7 @@ jobs:
     needs: build-dev
     environment:
       name: development
+      url: https://foo.dev.yahoo.com
     steps:
       - name: Checkout
         uses: actions/checkout@v2
